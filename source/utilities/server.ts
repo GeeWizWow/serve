@@ -9,7 +9,7 @@ import compression from 'compression';
 import isPortReachable from 'is-port-reachable';
 import chalk from 'chalk';
 import { getNetworkAddress, registerCloseListener } from './http.js';
-import { promisify } from './promise.js';
+import { promisify, wait } from './promise.js';
 import { logger } from './logger.js';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { AddressInfo } from 'node:net';
@@ -70,6 +70,9 @@ export const startServer = async (
       }
       if (!args['--no-compression'])
         await compress(request as ExpressRequest, response as ExpressResponse);
+
+      if (args['--delay'])
+        await wait(args['--delay']);
 
       // Let the `serve-handler` module do the rest.
       await handler(request, response, config);

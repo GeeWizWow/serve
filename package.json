@@ -1,7 +1,10 @@
 {
-  "name": "serve",
+  "name": "@geewizwow/serve",
   "version": "14.2.4",
   "description": "Static file serving and directory listing",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "vercel",
     "serve",
@@ -12,7 +15,7 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "serve": "./build/main.js"
+    "@geewizwow/serve": "./build/main.js"
   },
   "files": [
     "build/"

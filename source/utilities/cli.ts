@@ -96,6 +96,15 @@ const helpText = chalkTemplate`
 export const getHelpText = (): string => helpText;
 
 /**
+ * Parse and return the delay number from the given string.
+ */
+export const parseDelay = (delay: string): number => {
+  if (!isNaN(Number(delay))) return Number(delay);
+
+  throw new Error(`Unknown --delay value: ${delay}`);
+};
+
+/**
  * Parse and return the endpoints from the given string.
  *
  * @param uriOrPort - The endpoint to listen on.
@@ -160,6 +169,7 @@ const options = {
   '--ssl-key': String,
   '--ssl-pass': String,
   '--no-request-logging': Boolean,
+  '--delay': parseDelay,
   // A list of aliases for the above options.
   '-h': '--help',
   '-v': '--version',
@@ -172,6 +182,7 @@ const options = {
   '-S': '--symlinks',
   '-C': '--cors',
   '-L': '--no-request-logging',
+  '-D': '--delay',
 
   // The `-p` option is deprecated and is kept only for backwards-compatibility.
   '-p': '--listen',
@@ -189,6 +200,10 @@ export const parseArguments = (): Arguments => parseArgv(options);
  * to the user's notice by printing a message to the console.
  */
 export const checkForUpdates = async (manifest: object): Promise<void> => {
+  // Disable the update check for this fork
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (manifest) return;
+
   // Do not check for updates if the `NO_UPDATE_CHECK` variable is set.
   if (env.NO_UPDATE_CHECK) return;
 

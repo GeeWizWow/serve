@@ -29,6 +29,16 @@ export const resolve = async <T = unknown, E = Error>(
 };
 
 /**
+ * Returns a promise that resolves after the specified duration in ms
+ */
+export const wait = (delay: number): Promise<void> => {
+  return new Promise((_resolve) => {
+    setTimeout(_resolve, delay);
+  });
+}
+
+
+/**
  * Promisifies the passed function.
  */
 export { promisify } from 'node:util';

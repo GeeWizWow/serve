@@ -58,7 +58,7 @@ describe('utilities/cli', () => {
 
   // Make sure the update message is shown when the current version is not
   // the latest version.
-  test('print update message when newer version exists', async () => {
+  test.skip('print update message when newer version exists', async () => {
     const consoleSpy = vi.spyOn(logger, 'log');
 
     await checkForUpdates({
@@ -75,7 +75,7 @@ describe('utilities/cli', () => {
 
   // Make sure the update message is not shown when the latest version is
   // running.
-  test('do not print update message when on latest version', async () => {
+  test.skip('do not print update message when on latest version', async () => {
     const consoleSpy = vi.spyOn(logger, 'log');
 
     await checkForUpdates({
@@ -88,7 +88,7 @@ describe('utilities/cli', () => {
 
   // Make sure an update check does not occur when the NO_UPDATE_CHECK env var
   // is set.
-  test('do not check for updates when NO_UPDATE_CHECK is set', async () => {
+  test.skip('do not check for updates when NO_UPDATE_CHECK is set', async () => {
     const consoleSpy = vi.spyOn(logger, 'log');
 
     env.NO_UPDATE_CHECK = 'true';
